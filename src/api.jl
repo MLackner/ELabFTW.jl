@@ -32,9 +32,9 @@ function get_all_experiments(api::BaseAPI=BASE_API; limit=15, offset=0)
 	params = Dict(
 		"limit" => limit,
 		"offset" => offset,
-	)
+	) |> HTTP.Form
 
-	response = send_request(api, "experiments/"; query=params)
+	response = send_request(api, "experiments/"; body=params)
 	parse_response(response, Vector{Experiment})
 end
 
@@ -58,7 +58,7 @@ function get_all_items(api::BaseAPI=BASE_API; limit=15, offset=0)
 	)
 
 	response = send_request(api, "items/"; query=params)
-	parse_response(response, Item)
+	parse_response(response, Vector{Item})
 end
 
 """
@@ -109,8 +109,10 @@ function post_template(x::Template, api::BaseAPI=BASE_API)
 end
 
 function add_link_to_experiment(experiment_id::T, item_id::T, api::BaseAPI=BASE_API) where T <: Integer
-	body = Dict(:link => item_id) |> HTTP.Form
-	response = send_request(api, "templates/$(experiment_id)"; verb="POST", body=body)
+	@show body = Dict("link" => item_id) |> HTTP.Form
+	response = send_request(api, "templates/$(experiment_id)"; 
+		verb="POST", body=body
+	)
 end
 
 function add_link_to_experiment(x::Experiment, y::Item, api::BaseAPI=BASE_API)
@@ -118,8 +120,8 @@ function add_link_to_experiment(x::Experiment, y::Item, api::BaseAPI=BASE_API)
 end
 
 function add_link_to_item(item_id::T, link_id::T, api::BaseAPI=BASE_API) where T <: Integer
-	body = Dict(:link => item_id) |> HTTP.Form
-	response = send_request(api, "items/$(experiment_id)"; verb="POST", body=body)
+	body = Dict("link" => link_id) |> HTTP.Form
+	response = send_request(api, "items/$(item_id)"; verb="POST", body=body)
 end
 
 function add_link_to_item(x::Item, link::Item, api::BaseAPI=BASE_API) where T <: Integer

@@ -18,7 +18,10 @@ function send_request(api::BaseAPI, url::String, data::IO;)
 		verbose=2,
 		require_ssl_verification = api.verify,
 		proxy = api.proxy,
-		headers = ["Authorization" => api.token],
+		headers = [
+			"Authorization" => api.token, 
+			# "Content-Type" => "application/x-www-form-urlencoded"
+		],
 		body=body
 	)
 end
@@ -39,7 +42,10 @@ function send_request(api::BaseAPI, url::String;
 		verbose=2,
 		require_ssl_verification = api.verify,
 		proxy = api.proxy,
-		headers = ["Authorization" => api.token]
+		headers = [
+			"Authorization" => api.token, 
+			"Content-Type" => "application/x-www-form-urlencoded"
+		],
 	)
 end
 
