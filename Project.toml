@@ -1,0 +1,13 @@
+name = "ELabFTW"
+uuid = "2444c543-3c9e-4e99-85b9-4e3a0fc06dd9"
+authors = ["= <=> and contributors"]
+version = "0.1.0"
+
+[compat]
+julia = "1"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
