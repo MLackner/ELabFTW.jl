@@ -6,9 +6,21 @@ using JSON3
 using StructTypes
 
 function __init__()
+  endpoint = try 
+    ENV["ELABFTW_ENDPOINT"]
+  catch
+    ""
+  end
+
+  token = try 
+    ENV["ELABFTW_API_KEY"]
+  catch
+    ""
+  end
+
   global BASE_API = BaseAPI(
-		endpoint = ENV["ELABFTW_ENDPOINT"],
-	 	token = ENV["ELABFTW_API_KEY"]
+		endpoint = endpoint,
+	 	token = token
 	)
 end
 
