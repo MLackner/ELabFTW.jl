@@ -20,5 +20,5 @@ makedocs(;
 
 deploydocs(;
     repo="github.com/MLackner/ELabFTW.jl",
-    devbranch="master",
+    devbranch="main",
 )
